@@ -1,0 +1,16 @@
+{
+  "name": "simpletest",
+  "version": "1.0.0",
+  "description": "Cameron working on VS Plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cameron",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "nyc": "^11.8.0",
+    "vizion": "^2.0.0"
+  }
+}
