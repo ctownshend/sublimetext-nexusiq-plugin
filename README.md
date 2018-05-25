@@ -20,9 +20,9 @@ This will enable the package in Sublime.
 NexusIQEvaluation.py -> python code that runs the app
 
 ## Settings
-Base File.sublime-settings -> set the url to your Nexus IQ server as well as the user name and password
-Context.sublime-menu -> Enabled the context menu
-Default (OSX).sublime-keymap -> short cut key
-Main.sublime-menu -> targets the menu system
-Side Bar.sublime-menu -> left menu settings
-Package Control.sublime-settings -> Sublime text use
+### Base File.sublime-settings -> set the url to your Nexus IQ server as well as the user name and password
+### Context.sublime-menu -> Enabled the context menu
+### Default (OSX).sublime-keymap -> short cut key
+### Main.sublime-menu -> targets the menu system
+### Side Bar.sublime-menu -> left menu settings
+### Package Control.sublime-settings -> Sublime text use
