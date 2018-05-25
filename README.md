@@ -1,13 +1,15 @@
 # sublimetext-nexusiq-plugin
 Sublimetext-nexusiq-plugin will evaluate a package.json npm file in Sublime text against the Nexus IQ server
 
-
-
 ## Install
-Deploy the entire folder to ~/"Library/Application Support/Sublime Text 3/Packages"
-i.e. /Users/[username]/Library/Application Support/Sublime Text 3/Packages/sublimetext-nexusiq-plugin
+On a Mac
+Copy the NexusIQEvaluation folder to ~/"Library/Application Support/Sublime Text 3/Packages"
+i.e. /Users/[username]/Library/Application Support/Sublime Text 3/Packages/NexusIQEvaluation
 
-This will enable the package in Sublime. 
+Windows
+Add to the appropriate folder based on above.
+
+This will enable the package in Sublime Text 3. 
 
 ## Usage
 1) Make sure that you have a package.json file active
