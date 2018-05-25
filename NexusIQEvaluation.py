@@ -200,7 +200,7 @@ def handleError(self, edit, txtResponse):
 	self.panel = self.view.window().create_output_panel('sf_st3_output')
 	self.view.window().run_command('show_panel', { 'panel': 'output.sf_st3_output' })
 	#self.panel.run_command('sfprint');
-	#self.panel.insert(edit, self.view.size(), txtResponse)
+	self.panel.insert(edit, self.view.size(), txtResponse)
 	#panels["output.sf_st3_output"].insert(edit, self.view.size(), txtResponse)
 	#createdPopupPanel.insert(edit, 0, txtResponse)
 	#createdView.insert(edit, 0, txtResponse)
@@ -239,22 +239,31 @@ def saveOutput(self, edit, json_obj, strPath):
 	#createdView.run_command("save")
 	return fullSavePath
 
+def isPackageJson(self):
+	isPackageJson=False
+	strFullFileName=self.view.file_name()		
+	#strPath='\\'.join(strFileName.split('\\')[0:-1])
+	strPath, strFileName = os.path.split(os.path.abspath(strFullFileName))
+	print("strFullFileName: %r, strPath: %r, strFileName: %r" % (strFullFileName, strPath, strFileName))
+	txtMessage="Please select a package.json before continuing"
+	isPackageJson=not (strFileName==None or strFileName.find("package.json") == -1)
+	return isPackageJson
+
 class NexusEvaluationCommand(sublime_plugin.TextCommand):
 	def run(self, edit):	
 		print ("NexusEvaluationCommand_run")
-		#print("ExampleCommand")
-		#txtResponse="Hello World!"
-		#/Users/camerontownshend/Documents/Cameron/dev/learnNPM/simpletest/package.json
-		#print (self.view.file_name())
-		strFullFileName=self.view.file_name()		
-		#strPath='\\'.join(strFileName.split('\\')[0:-1])
+		txtMessage="Please select a package.json before continuing"
+		isNPM=isPackageJson(self)
+		if (not isNPM):
+			handleError(self, edit, txtMessage + str(isNPM))		
+			return (txtMessage)
+
+		strFullFileName=self.view.file_name()
 		strPath, strFileName = os.path.split(os.path.abspath(strFullFileName))
 		print("strFullFileName: %r, strPath: %r, strFileName: %r" % (strFullFileName, strPath, strFileName))
-		txtMessage="Please select a package.json before continuing"
-		isPackageJason=(strFileName==None or strFileName.find("package.json") == -1)
-		if (isPackageJason):
-			handleError(self, edit, txtMessage + str(test))		
-			return (txtMessage)
+
+
+
 
 		# intFind=strFileName.find("package.json")
 		# if (intFind==-1):
