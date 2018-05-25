@@ -1,0 +1,7 @@
+[
+	{ 
+		//shift, ctrl, alt, super 
+		"keys": ["super+ctrl+shift+n"],
+		"command": "nexus_evaluation"
+	}
+]

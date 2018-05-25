@@ -1,0 +1,8 @@
+{
+	//#settings
+	"scheme" : "http",
+	"uri" : "localhost",
+	"port" : "8070",
+	"username" : "admin",
+	"password" : "admin123"
+}

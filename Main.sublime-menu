@@ -1,0 +1,17 @@
+[
+    {
+        "caption": "Tools",
+        "mnemonic": "T",
+        "id": "tools",
+        "children":
+        [
+	        {
+            
+			    "id" : "nexusIQEvaluation",			    
+			    "caption" : "Nexus IQ Evaluation",
+			    "mnemonic": "N",
+			    "command" : "nexus_evaluation"
+			}               
+        ]
+    }
+]
