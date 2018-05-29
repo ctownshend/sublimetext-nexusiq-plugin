@@ -22,8 +22,8 @@ This will enable the package in Sublime Text 3.
 NexusIQEvaluation.py -> python code that runs the app
 
 ## Settings
-### Base File.sublime-settings
-set the url to your Nexus IQ server as well as the user name and password
+### NexusIQEvaluation.sublime-settings
+Settings file. Set the url to your Nexus IQ server as well as the user name and password
 ### Context.sublime-menu
 Enabled the context menu
 ### Default (OSX).sublime-keymap
