@@ -1,0 +1,13 @@
+{
+	//#settings
+	"scheme" : "http",
+	"uri" : "localhost",
+	"port" : "8070",
+	"rest" : "api/v2/components/details",
+	"username" : "admin",
+	"password" : "admin123",
+	"enableProxyDebug" : "False",
+	"proxyscheme" : "http",
+	"proxyserver" : "http://localhost",
+	"proxyPort" : "8080"
+}

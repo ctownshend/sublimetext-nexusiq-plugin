@@ -131,30 +131,62 @@ def parseShrinkWrap(fileContents):
 	return (d["dependencies"])
 
 
-def serverURL():
+def getNexusIQEvaluation_Settings():
 	print ("ServerURL")
-	scheme=view.settings().get("scheme")
-	uri=view.settings().get("uri")
-	port=view.settings().get("port")
-	username=view.settings().get("username")
-	password=view.settings().get("password")
-	rest="api/v2/components/details"
-	theurl="%s://%s:%s/%s" % (scheme, uri, port, rest)
-	print (theurl)
-	return (theurl)
+	nexusIQEvaluation_Settings_filename = 'NexusIQEvaluation.sublime-settings'
+	nexusIQEvaluation_Settings = sublime.load_settings(nexusIQEvaluation_Settings_filename)
+	#return nexusIQEvaluation_Settings
+
+	scheme = nexusIQEvaluation_Settings.get("scheme")
+	uri = nexusIQEvaluation_Settings.get("uri")
+	port = nexusIQEvaluation_Settings.get("port")
+	rest = nexusIQEvaluation_Settings.get("rest")
+
+
+	proxyserver = nexusIQEvaluation_Settings.get("proxyserver")
+	proxyPort = nexusIQEvaluation_Settings.get("proxyPort")
+	proxyAddressEndPoint="%s:%s" % (proxyserver, port)
+
+	print (proxyAddressEndPoint)
+	retValue = {
+		"scheme" :  scheme,
+		"uri" : uri,
+		"port" : port,
+		"rest" : rest,
+		"url" : "%s://%s:%s/%s" % (scheme, uri, port, rest),
+		"username" : nexusIQEvaluation_Settings.get("username"),
+		"password" : nexusIQEvaluation_Settings.get("password"),
+		"useproxy" : nexusIQEvaluation_Settings.get("useproxy"),
+		"proxyscheme" : nexusIQEvaluation_Settings.get("proxyscheme"),
+		"proxyserver" : nexusIQEvaluation_Settings.get("proxyserver"),
+		"proxyPort" : nexusIQEvaluation_Settings.get("proxyPort"),
+		"proxyAddressEndPoint" : proxyAddressEndPoint
+	}
+	return (retValue)
+
+
+
 
 def evaluateComponent(componentlist):
 	print ("EvaluateComponent")
 	#receive a dictionary of components
 	#return the Json object
-	uri="localhost"    
-	port=str(8070)
-	username="admin"
-	password="admin123"
-	theurl="http://%s:%s/api/v2/components/details" % (uri,port)
+	settings = getNexusIQEvaluation_Settings()
+	#useproxy, proxyAddressEndPoint, proxyscheme = proxyAddress()
 
-
-
+	#theurl, scheme, uri, port, rest, username, password = serverURL();
+	#useproxy, proxyAddressEndPoint, proxyscheme, theurl, scheme, uri, port, rest, username, password 
+	
+	scheme=settings["scheme"]
+	uri=settings["uri"]
+	port=settings["port"]
+	rest=settings["rest"]
+	url=settings["url"]
+	username=settings["username"]
+	password = settings["password"]
+	useproxy = settings["useproxy"]
+	proxyAddressEndPoint = settings["proxyAddressEndPoint"]
+	proxyscheme = settings["proxyscheme"]
 	#json_data = json.dumps(d).encode('utf8')
 	json_data = json.dumps(componentlist).encode('utf8')
 
@@ -170,9 +202,9 @@ def evaluateComponent(componentlist):
 	opener = request.build_opener(handler)
     # use the opener to fetch a URL
 	#opener.open(theurl)
-	enableProxyDebug=False
-	if (enableProxyDebug):
-		proxy=request.ProxyHandler({"http" : "http://localhost:8080"})
+	
+	if (useproxy):
+		proxy=request.ProxyHandler({proxyscheme : proxyAddressEndPoint})
 		opener = request.build_opener(proxy)
 
     # Install the opener.
@@ -186,7 +218,7 @@ def evaluateComponent(componentlist):
 
 	#print (theurl)
 	#return
-	req= request.Request(theurl, data=json_data, method='POST', headers={'Content-Type': 'application/json', 'Authorization': auth})
+	req= request.Request(url, data=json_data, method='POST', headers={'Content-Type': 'application/json', 'Authorization': auth})
 	resp = request.urlopen(req)	
 	#text = str(resp.status)
 	string = resp.read().decode('utf-8')
